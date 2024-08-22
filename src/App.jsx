@@ -3,12 +3,18 @@ import "./App.css";
 import VideoUpload from "./components/VideoUpload";
 import { useState } from "react";
 import VideoPlayer from "./components/VideoPlayer";
+import { Button, TextInput } from "flowbite-react";
 
 function App() {
   const [videoId, setVideoId] = useState(
-    "f5215eff-0747-4058-8285-3b396451c366"
+    "f2a91d5e-b1ef-4e20-a913-91c72ba0c699"
   );
 
+  const [fieldValue, setFieldValue] = useState(null);
+
+  function playVideo(videoId){
+    setVideoId(videoId);
+  }
   return (
     <>
       <Toaster></Toaster>
@@ -20,7 +26,7 @@ function App() {
 
         <div className="flex w-full justify-around mt-14">
           <div>
-            <h1 className="text-white">Playing video</h1>
+            <h1 className="text-white text-center">Playing video</h1>
             {/* <video 
             // src={`http://localhost:8080/api/v1/videos/stream/range/${videoId}`} 
             src={`http://localhost:8080/api/v1/videos/f2a91d5e-b1ef-4e20-a913-91c72ba0c699/master.m3u8`} 
@@ -52,14 +58,24 @@ function App() {
                 </a>
               </p>
             </video> */}
-
+            
             <div>
-              <VideoPlayer src={`http://localhost:8080/api/v1/videos/f2a91d5e-b1ef-4e20-a913-91c72ba0c699/master.m3u8`}></VideoPlayer>
+              <VideoPlayer src={`http://localhost:8080/api/v1/videos/${videoId}/master.m3u8`}></VideoPlayer>
             </div>
           </div>
           <VideoUpload />
         </div>
+        <div className="my-4 flex space-x-4">
+              <TextInput onChange={(event) => {
+                setFieldValue(event.target.value);
+              }} name="video_id_field" placeholder="Enter video id here"></TextInput>
+              <Button onClick={() => {
+                setVideoId(fieldValue);
+              }} >Play</Button>
+            </div>
+
       </div>
+      
     </>
   );
 }
