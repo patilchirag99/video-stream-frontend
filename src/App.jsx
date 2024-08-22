@@ -2,6 +2,7 @@ import { Toaster } from "react-hot-toast";
 import "./App.css";
 import VideoUpload from "./components/VideoUpload";
 import { useState } from "react";
+import VideoPlayer from "./components/VideoPlayer";
 
 function App() {
   const [videoId, setVideoId] = useState(
@@ -20,13 +21,13 @@ function App() {
         <div className="flex w-full justify-around mt-14">
           <div>
             <h1 className="text-white">Playing video</h1>
-            <video 
+            {/* <video 
             // src={`http://localhost:8080/api/v1/videos/stream/range/${videoId}`} 
             src={`http://localhost:8080/api/v1/videos/f2a91d5e-b1ef-4e20-a913-91c72ba0c699/master.m3u8`} 
             controls style={{
             width:500,
             height:500
-          }}></video>
+          }}></video> */}
 
             {/* <video
               id="my-video"
@@ -51,6 +52,10 @@ function App() {
                 </a>
               </p>
             </video> */}
+
+            <div>
+              <VideoPlayer src={`http://localhost:8080/api/v1/videos/f2a91d5e-b1ef-4e20-a913-91c72ba0c699/master.m3u8`}></VideoPlayer>
+            </div>
           </div>
           <VideoUpload />
         </div>
